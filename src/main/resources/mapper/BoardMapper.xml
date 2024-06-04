@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.board.mapper.BoardMapper">
+    <select id="findAll" resultType="com.example.board.model.BoardDTO">
+        select * from board
+    </select>
+
+
+    <insert id="insert" parameterType="com.example.board.model.BoardDTO">
+        insert into board (title,content,writer,created_dt,updated_dt)
+        values (#{title}, #{content}, #{writer}, now(), now());
+    </insert>
+
+    <select id="findById" parameterType="int" resultType="com.example.board.model.BoardDTO">
+        select id,title,content,writer,created_dt,updated_dt from board
+        where id=#{id};
+    </select>
+
+    <delete id="delete" parameterType="int">
+        delete from board where id=#{id};
+    </delete>
+
+    <update id="update" parameterType="com.example.board.model.BoardDTO">
+        update board set title=#{title} ,content=#{content},update_dt=now() where id = #{id};
+    </update>
+</mapper>
